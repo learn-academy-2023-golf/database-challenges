@@ -157,3 +157,94 @@ GROUP BY continent;
 -- What is the total population of all continents?
 SELECT SUM(population)
 FROM country
+
+Which countries have the letter "z" in the name? How many?
+
+WITH ordered AS (
+SELECT name, COUNT(*)
+FROM country
+GROUP BY name
+ORDER BY count
+)
+SELECT name 
+FROM ordered
+WHERE name 
+LIKE '%z%'
+
+Of the smallest 10 countries by area, which has the biggest gnp? (HINT: Macao)
+
+WITH ordered AS (
+SELECT name, surfacearea, gnp
+FROM country 
+WHERE surfacearea > 0
+ORDER BY surfacearea
+LIMIT 10
+)
+SELECT name, surfacearea, gnp
+FROM ordered
+ORDER BY gnp DESC
+
+Of the smallest 10 countries by population, which has the biggest per capita gnp?
+
+WITH ordered AS (
+SELECT name, population, gnp
+FROM country 
+WHERE population > 0
+ORDER BY population
+LIMIT 10
+)
+SELECT name, population, gnp / population as gnp_per_capita
+FROM ordered
+ORDER BY gnp_per_capita DESC
+
+Of the biggest 10 countries by area, which has the biggest gnp?
+
+WITH ordered AS (
+SELECT name, surfacearea, gnp
+FROM country 
+WHERE surfacearea > 0
+ORDER BY surfacearea DESC
+LIMIT 10
+)
+SELECT name, surfacearea, gnp
+FROM ordered
+ORDER BY gnp DESC
+
+Of the biggest 10 countries by population, which has the biggest per capita gnp?
+
+WITH ordered AS (
+SELECT name, population, gnp
+FROM country 
+WHERE population > 0
+ORDER BY population DESC
+LIMIT 10
+)
+SELECT name, population, gnp / population as gnp_per_capita
+FROM ordered
+ORDER BY gnp_per_capita DESC
+
+What is the sum of surface area of the 10 biggest countries in the world? The 10 smallest?
+
+BIGGEST:
+WITH ordered AS (
+SELECT name, surfacearea
+FROM country 
+WHERE surfacearea > 0
+ORDER BY surfacearea DESC
+LIMIT 10
+)
+SELECT SUM(surfacearea)
+FROM ordered
+
+SMALLEST: 
+WITH ordered AS (
+SELECT name, surfacearea
+FROM country 
+WHERE surfacearea > 0
+ORDER BY surfacearea
+LIMIT 10
+)
+SELECT SUM(surfacearea)
+FROM ordered
+
+What year is this country database from? Cross reference various pieces of information to determine the age of this database.
