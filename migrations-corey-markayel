@@ -1,0 +1,64 @@
+# As a developer, I can add a category to the Movie model called category that is a string.
+rails g model Movie
+rails db:migrate
+
+class AddCategoryToMovie < ActiveRecord::Migration[7.0]
+  def change
+    add_column :movies, :category, :string
+  end
+end
+
+
+# As a developer, I can add a category to the Movie model called rating that is a string.
+
+rails generate migration add_ratings_to_movie
+rails db:migrate
+class AddRatingsToMovie < ActiveRecord::Migration[7.0]
+  def change
+        add_column :movies, :ratings, :string
+  end
+end
+
+# As a developer, I can add a category to the Movie model called run_time that is a number.
+rails generate migration add_runtime_to_movies
+rails db:migrate
+class AddRuntimeToMovies < ActiveRecord::Migration[7.0]
+  def change
+    add_column :movies, :run_times, :integer
+  end
+end
+# As a developer, I can add five entries to the database via the Rails console.
+
+rails c
+Movie.create(category: "comedy", ratings:"funny", run_times: 60, name: "Fu
+nny Movie")
+Movie.create(category: "horror", ratings:"scary", run_times: 61, name: "Sc
+ary Movie")
+Movie.create(category: "emotional", ratings:"crying", run_times: 62, name:
+ "Sad Movie")
+ Movie.create(category: "action", ratings:"awesome", run_times: 135, name: 
+"Speed Racer")
+
+# As a developer, I can update the run_time column to be a string.
+exit 
+rails generate migration update_runtime_to_string
+class UpdateRuntimeToString < ActiveRecord::Migration[7.0]
+  def change
+    change_column :movies, :run_times, :string
+  end
+end
+
+# As a developer, I can update the values of the five existing database entries to include a unit of time on the run_time column. (Example: '165 minutes' or '1 hr, 45 minutes')
+
+Movie.update_all(run_times: "165 minutes")
+
+# As a developer, I can rename the column category to be named genre.
+
+
+rails generate migration update_category_to_genre
+
+class UpdateCategoryToGenre < ActiveRecord::Migration[7.0]
+  def change
+    rename_column :movies, :category, :genre
+  end
+end
