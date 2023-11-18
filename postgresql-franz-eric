@@ -1,0 +1,167 @@
+SELECT *      
+FROM country
+
+SELECT population 
+FROM country 
+WHERE name = 'United States'
+// 278357000
+
+
+SELECT name, surfacearea, population, 
+population / surfacearea AS population_density
+FROM country 
+WHERE name = 'United States'
+// 9.36352e+06
+
+
+SELECT name, indepyear
+FROM country
+WHERE indepyear < 1963
+LIMIT 10
+
+SELECT name, lifeexpectancy, population, continent  
+FROM country
+WHERE population < 30e6 AND lifeexpectancy > 45 AND continent = 'Africa'
+
+
+SELECT *
+FROM country
+WHERE governmentform LIKE '%Republic%'
+//143
+
+SELECT *
+FROM country
+WHERE governmentform LIKE '%Republic%' AND indepyear > 1945
+// 92 entries
+
+SELECT *
+FROM country
+WHERE governmentform NOT LIKE '%Republic%' AND indepyear > 1945
+// 27 entries
+
+SELECT * , lifeexpectancy
+FROM country
+ORDER BY lifeexpectancy
+LIMIT 15
+// Starts with Zambia ends with Sierra Leone
+
+SELECT * , lifeexpectancy
+FROM country
+WHERE lifeexpectancy != 0
+ORDER BY lifeexpectancy DESC
+LIMIT 15
+
+
+SELECT name, surfacearea, population,
+population / surfacearea AS population_density
+FROM country
+WHERE population != 0
+ORDER BY population_density
+LIMIT 5
+
+
+SELECT name, surfacearea, population,
+population / surfacearea AS population_density
+FROM country
+WHERE population != 0
+ORDER BY population_density DESC
+LIMIT 5
+
+
+SELECT * 
+FROM country
+WHERE population != 0
+ORDER BY surfacearea
+LIMIT 5
+// Vatican 0.4
+
+SELECT * 
+FROM country
+WHERE population != 0
+ORDER BY population
+LIMIT 5
+// Pitcairn= 50
+
+
+SELECT * 
+FROM country
+WHERE population != 0
+ORDER BY surfacearea DESC
+LIMIT 5
+// Russian Federation
+
+SELECT * 
+FROM country
+WHERE population != 0
+ORDER BY population DESC
+LIMIT 5
+//China
+
+SELECT * 
+FROM country
+WHERE population != 0
+ORDER BY population DESC
+LIMIT 5
+// Chinese Head of State
+
+
+SELECT *, population, gnp
+FROM country
+WHERE population != 0 
+GROUP BY population
+ORDER BY gnp DESC
+LIMIT 10
+// Canada
+
+
+SELECT *, population
+FROM country
+WHERE population != 0 
+ORDER BY population
+LIMIT 10
+// Svalbard and Jan Mayen
+
+SELECT name, AVG(gnp) AS average_gnp
+FROM country
+WHERE population != 0 
+GROUP BY name
+ORDER BY average_gnp DESC
+LIMIT 10
+// United States
+
+
+SELECT *, surfacearea
+FROM country
+ORDER BY surfacearea DESC
+// Putin
+
+
+SELECT continent, AVG(lifeexpectancy) AS average_life
+FROM country
+WHERE lifeexpectancy != 0
+GROUP BY continent
+
+"Africa"	52.57192966394257
+"Asia"	67.44117676978017
+"South America"	70.94615320058969
+"North America"	72.99189170631203
+"Europe"	75.14772761951794
+"Oceania"	69.71500053405762
+
+
+SELECT governmentform, COUNT(*)
+FROM country
+GROUP BY governmentform
+ORDER BY count DESC
+LIMIT 1
+// Republic
+
+
+SELECT *
+FROM country
+WHERE continent = 'North America'
+// 37
+
+
+
+
